@@ -90,6 +90,7 @@ public class TransactionsGenerator {
         String outputFilesLocation = settings.get("outDir").toString();
 
         try (FileInputStream input = new FileInputStream(itemsInputFileLocation)) {
+            Files.createDirectories(Paths.get(outputFilesLocation));
             List<Item> availableItems = ItemsReader.getFromCSV(input);
             for (int i = 1; i <= eventsCount.getValue(); i++) {
                 Collections.shuffle(availableItems);
@@ -98,7 +99,6 @@ public class TransactionsGenerator {
                 for (int j = 0; j < count; j++) {
                     orderedItems.put(availableItems.get(j%availableItems.size()), itemsQuantity.random());
                 }
-                Files.createDirectories(Paths.get(outputFilesLocation));
                 FileOutputStream output =
                              new FileOutputStream(Paths.get(outputFilesLocation, i+".json").toString());
                 output.write(
