@@ -35,7 +35,7 @@ public class TransactionsGeneratorTest {
         String[] args = { "-customerIds", "1:1", "-dateRange",
                 "2018-03-08T12:31:13.000-0100:2018-03-08T12:31:13.000-0100",
                 "-itemsFile", "items.csv", "-itemsCount", "1:1", "-itemsQuantity", "1:1",
-                "-eventsCount", "1", "-outDir", "./"};
+                "-eventsCount", "1", "-outDir", "./output"};
         try {
             TransactionsGenerator.main(args);
         } catch (IOException e) {

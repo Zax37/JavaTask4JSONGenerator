@@ -89,7 +89,7 @@ public class TransactionsGenerator {
         String itemsInputFileLocation = settings.get("itemsFile").toString();
         String outputFilesLocation = settings.get("outDir").toString();
 
-        try (FileInputStream input = new FileInputStream(itemsInputFileLocation)) {
+        try (BufferedReader input = new BufferedReader(new FileReader(itemsInputFileLocation))) {
             Files.createDirectories(Paths.get(outputFilesLocation));
             List<Item> availableItems = ItemsReader.getFromCSV(input);
             for (int i = 1; i <= eventsCount.getValue(); i++) {
