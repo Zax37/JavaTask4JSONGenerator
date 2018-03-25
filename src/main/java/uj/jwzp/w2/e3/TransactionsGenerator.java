@@ -2,6 +2,7 @@ package uj.jwzp.w2.e3;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.UnexpectedException;
@@ -94,9 +95,10 @@ public class TransactionsGenerator {
                 Collections.shuffle(availableItems);
                 int count = itemsCount.random();
                 LinkedHashMap<Item, Integer> orderedItems = new LinkedHashMap<>();
-                for (int j = 1; j <= count; j++) {
-                    orderedItems.put(availableItems.get(j), itemsQuantity.random());
+                for (int j = 0; j < count; j++) {
+                    orderedItems.put(availableItems.get(j%availableItems.size()), itemsQuantity.random());
                 }
+                Files.createDirectories(Paths.get(outputFilesLocation));
                 FileOutputStream output =
                              new FileOutputStream(Paths.get(outputFilesLocation, i+".json").toString());
                 output.write(
